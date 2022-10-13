@@ -45,4 +45,6 @@ I need to be able to calculate a lot of values for the heuristics I plan on plug
 $$PE = \frac{Price}{EPS}$$
 Where *price* is the price per share and *EPS* is earnings per share.
 
-- ****
+- **Price Earnings Growth Rate PEG:**
+
+- **

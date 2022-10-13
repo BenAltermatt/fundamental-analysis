@@ -1,3 +1,9 @@
 # These data files are too large when uncompressed
 *.csv
 *.json
+
+# I need to add the api key text file that I am making to this
+# so my API key isn't public
+
+
+apikey.txt
