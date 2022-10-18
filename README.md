@@ -1,6 +1,7 @@
 # Fundamental And Sentiment Analysis
 
-This is my semester long project for Machine Learning (CS 4824). 
+This is my semester long project for Machine Learning (CS 4824).
+
 ---
 
 ## Overview
@@ -15,12 +16,13 @@ The first, and more overarching model that I plan on developing is a classificat
 |--|--|
 | Feature Space (***X***) | A set of heuristics used for fundamental analysis which I haven't completely decided upon yet. Some of the existing options for the values include: P/E, EPS, PEG, FCF, P/B, ROE, DPR, P/S, Divident-to-Yield, D/E, and maybe some more.|
 | Label Space (***Y***) | A value indicating whether this buy would have been more profitable than a concurrent buy of the S&P 500 at the time of purchase. Likely {-1, 1} where -1 is a "bad buy" and 1 is a "good buy"|
-| Loss Function ***L(y, yi)*** | 
-
+| Loss Function ***L(y, yi)*** | |
 
 ## Sentiment Analysis (Model B)
 
 This is a repository for a project surrounding the use of sentiment analysis along with fundamental analysis-based regression to build portfolios for stock choices.
+
+---
 
 ## Developer's Log
 
@@ -47,4 +49,41 @@ Where *price* is the price per share and *EPS* is earnings per share.
 
 - **Price Earnings Growth Rate PEG:**
 
-- **
+- ***This Section was not completed as it quickly became unimportant***
+
+### Building the data set
+
+It has come to my attention that the most useful next move is most likely going to be just building the data set from the API I have. This is something I will need to do relatively carefully, given the fact that APIs can be rate limited and I have a limited amount of time to actually build this data set. The data set I am currently thinking of will consist of data points as follows:
+
+#### Features
+
+Again, these were essentially chosen from a large number of otions with guidance from this article at [Investor Academy](https://investoracademy.org/top-10-fundamental-analysis-indicators-for-all-investors/).
+
+|name|id in api|abbreviation|
+|--|--|--|
+|Price-to-Earnings Ratio| peRatio| pe|
+|Earings per share | netIncomePerShare| eps|
+|Free Cash Flow per Share | freeCashFlowPerShare| fcf|
+|Price to Book Ratio | pbRatio| pb |
+|Return on Equity | roe| roe|
+|Dividend Payout Ratio | payoutRatio| dpr|
+|Dividend Yield Ratio | dividendYield| yield|
+|Debt to Equity Ratio | debtToEquity| de|
+|Price to Sales Ratio | priceToSalesRatio| ps|
+
+#### Labels
+
+- 1 if the stock is more performative than the S&P 500
+- -1 if the stock is less perfomative than the S&P 500
+
+I think I need to make a simplifying assumption here to make the model work. Maybe I will say more performative for the S&P 500 over 6 months. I chose this time period because the average holdng period for stocks is about 5.5 months according to [smartasset.com](https://smartasset.com/investing/what-is-the-average-stock-holding-period).
+
+I do not yet know how I should store this data. Part of the reason being, I don't know how I am going to use multiple separate dates for the same stocks. I remember the timeline or continuity possibly presenting a problem with building data sets like this previously so I am wary of making poor assumptions with my data set.
+
+#### Shape of Data
+
+I don't yet completely know what I want my final data to look like because I am still unsure of what models I want to try, but for now I will prioritize making the data currently more accessible. To me, this means my data might look something like:
+
+```txt
+ticker, buy date, pe, eps, fcf, pb, roe, dpr, yield, de, ps, label
+```
