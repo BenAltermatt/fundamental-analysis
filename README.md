@@ -74,7 +74,7 @@ Again, these were essentially chosen from a large number of otions with guidance
 #### Labels
 
 - 1 if the stock is more performative than the S&P 500
-- -1 if the stock is less perfomative than the S&P 500
+- 0 if the stock is less perfomative than the S&P 500
 
 I think I need to make a simplifying assumption here to make the model work. Maybe I will say more performative for the S&P 500 over 6 months. I chose this time period because the average holdng period for stocks is about 5.5 months according to [smartasset.com](https://smartasset.com/investing/what-is-the-average-stock-holding-period).
 
@@ -87,3 +87,37 @@ I don't yet completely know what I want my final data to look like because I am 
 ```txt
 ticker, buy date, pe, eps, fcf, pb, roe, dpr, yield, de, ps, label
 ```
+
+#### Picking Prices
+
+I have run into a little problem with my model that could cause some unwanted issues. I have decided earlier on, and now maintain that I may go back and fix, that the stock prices for each quarter are associated with the close of the market on the first day of said quarter.
+
+I think the best bang for my buck could be averaging high, low, opening, and close? Otherwise I'd take a range of dates around the day and average those, but that could be a lot of work.
+
+#### Dataset Problems
+
+There are a lot of assumptions I had to make about my data and requests from the API to make this doable, and it may have led to some poorly cleaned data in my data set. If I had time, one of the best things I could do for the proper development of this model would likely be to go back into the data building process and make it less assumption based, as well as adding some sanity checks to make sure the data is accurate.
+
+## Model
+
+### Data preparation
+
+Now that I have a fully formed dataset, I need a way to prepare the data to be fed through the model for maximum results. This partially means normalization, however, a lot of these values are heavily centralized around a mean and have massive ranges. This ends up meaning that much of the data points look exceedingly similar. I am wondering if there is a nicer tactic I can use to maybe over-emphasize differences in points centralized around the mean and maybe less emphasize the large differences. Would this even be conducive to more useful information to feed into the model, though?
+
+#### Options for normalization
+
+|Option|Usefulness|
+|--|--|
+|linear| This is the version we learned in class. This linearly distributes values of the actual data between 0 and 1 instead of their actual minimum and maximum.
+|logarithmic| I already don't know about the feasibility of this because I have never tried this before, but perhaps we could take the log of each value and then apply the linear distribution. Though this might not solve the centralization problem.
+|z-score | I guess the shape of the distribution is not something I should mess with, as that makes more assumptions on my end about data I don't really understand. Maybe the z-score would only be useful when the feature I am looking for is a value relative to othe existing companies.|
+
+For now, I will stick with linear and make changes as I see fit.
+
+#### Outliers / Potential Data set problems
+
+1. There are a number of metrics for which I have found that outliers may exist. I might instead of attempting to change my normalization scheme, try to remove outliers from consideration and then attempt to normalize.
+
+2. Removing outliers via the inter-quartile method almsot halves my data set, which makes me want to try to take a log of some of the values before doing all of this.
+
+3. I tried taking the logs and the amount lost by using the inter-quartile method did not change. I am surprised by this but the math may work out such that this would always be the case, I am not sure.
