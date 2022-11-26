@@ -1,7 +1,7 @@
 # These data files are too large when uncompressed
 *.csv
 *.json
-
+!dataset.csv
 # I need to add the api key text file that I am making to this
 # so my API key isn't public
 
