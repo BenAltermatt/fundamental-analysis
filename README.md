@@ -121,3 +121,17 @@ For now, I will stick with linear and make changes as I see fit.
 2. Removing outliers via the inter-quartile method almsot halves my data set, which makes me want to try to take a log of some of the values before doing all of this.
 
 3. I tried taking the logs and the amount lost by using the inter-quartile method did not change. I am surprised by this but the math may work out such that this would always be the case, I am not sure.
+
+## Logistic Fitting
+
+This model ended up being my first attempt to solve the problem with. There are a number of limitations to this design that I overlooked for its simplicity. It sort of acted as a "get your foot in the door" model, to help me get a better handle on the feasibility of solving this problem. I got a little bit of a trained model, but after using this one, some attributes of my data are clear to me.
+
+1. There seem to be some weaknesses with the simplicity of a linear classifier such as this, meaning it might be beneficial to use a model that can handle more complex decision boundaries.
+
+2. If I wanted to really push this model, especially when it comes to increasing its applicable performance, adding the ability to abstain might be a valuable approach to maximize the probability of consistently beating the market.
+
+## ANN Fitting
+
+I intend here to try to build a simple neural network that has the capacity to draw a more complex decision boundary. The neural network code is inspired heavily by the simplified explanation given in [this video.](https://youtu.be/h3l4qz76JhQ)
+
+As far as architecture goes, I am not completely educated on what makes for a good architecture in this case. I am going to start with a fully connected network with layers of 9-10-10-1. This is a starting point, I am not sure whether I will stick with this one.
